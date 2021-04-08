@@ -1,0 +1,27 @@
+{
+  "name": "cryptoinsurance15_demo",
+  "version": "1.0.0",
+  "description": "This is a backend application for an insurance which makes use of cryptocurrency to setup a policy when the policy is due for payment, the payment is by means of cryptocurrency token for that policy ",
+  "main": "truffle-config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Obi1-x/CryptoInsurance15_demo.git"
+  },
+  "keywords": [
+    "bsc",
+    "cryptoinsurance"
+  ],
+  "author": "Group15-BAM-Temitope, Okeke, William, Adewale,Mac,MS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Obi1-x/CryptoInsurance15_demo/issues"
+  },
+  "homepage": "https://github.com/Obi1-x/CryptoInsurance15_demo#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "truffle-hdwallet-provider-privkey": "^0.3.0"
+  }
+}
