@@ -23,9 +23,9 @@ const getBlockchain = () =>
                 resolve({ hashsurance });
                 return;
             } else {
-                const helloWorld = { data: 'Select Required Metamask network' };
-                console.log('{ helloWorld }', { helloWorld });
-                resolve({ helloWorld });
+                const hashsurance = { data: 'Select Required Metamask network' };
+                console.log('{ hashsurance }', { hashsurance });
+                resolve({ hashsurance });
                 return;
             }
 

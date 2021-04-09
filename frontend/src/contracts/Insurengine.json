@@ -1,0 +1,237 @@
+{
+  "contractName": "Insurengine",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/insurance_engine.sol\":\"Insurengine\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/Hashsurance.sol\":{\"keccak256\":\"0xcdb96d1293a1cbd32d65ea25c7fc0ff7dda2fb702d154764a1f988c5a6587410\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://84d7442a5248a296f0258f2d31177037fd213631326960440ec95f37bd2d864d\",\"dweb:/ipfs/QmRGkfv5qYMoba8XJdM2pkiNzMzC4idPzZfR7B6p31h4yK\"]},\"/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/insurance_engine.sol\":{\"keccak256\":\"0x25bb75e663f59ee14d3acc4e7cdf43310dc3fd8d624ff0ea8efe59c51fae6470\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ed046eb122b111ef714d5dbf3c80d2ab1210f871483f3170f31a3038efd0ae10\",\"dweb:/ipfs/QmUAA81Q1oGK1W469S3zWEmUvLCF9x2NWFufquDTUD9anq\"]},\"/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/policy_contract.sol\":{\"keccak256\":\"0x1299a23edb3a82267dc6583dd521d82ad3f920a6ea345b3af14616178c2b413e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3e5832d9c01332e7cc0e39eea1fda95559b7e16f2887d823f73e65053dec2997\",\"dweb:/ipfs/QmUY64EiFWxW3CQXhR51HQtfZPiuT38CVfM9ca2B2VSZM3\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122013c5af68d454de375695d990c14ab630a4c9f668a585c609aa99800a84e186b864736f6c63430008000033",
+  "deployedBytecode": "0x6080604052600080fdfea264697066735822122013c5af68d454de375695d990c14ab630a4c9f668a585c609aa99800a84e186b864736f6c63430008000033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "236:43:1:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "236:43:1:-:0;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n// Imports token contracts from finance department.\nimport \"./Hashsurance.sol\"; //@ philip, kindly insert the tokens you created to this statement\nimport \"./policy_contract.sol\";\n\ncontract Insurengine{\n  Policy policies;\n\n}\n",
+  "sourcePath": "/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/insurance_engine.sol",
+  "ast": {
+    "absolutePath": "/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/insurance_engine.sol",
+    "exportedSymbols": {
+      "Hashsurance": [
+        235
+      ],
+      "Insurengine": [
+        243
+      ],
+      "Policy": [
+        260
+      ]
+    },
+    "id": 244,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 237,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:1"
+      },
+      {
+        "absolutePath": "/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/Hashsurance.sol",
+        "file": "./Hashsurance.sol",
+        "id": 238,
+        "nodeType": "ImportDirective",
+        "scope": 244,
+        "sourceUnit": 236,
+        "src": "108:27:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/policy_contract.sol",
+        "file": "./policy_contract.sol",
+        "id": 239,
+        "nodeType": "ImportDirective",
+        "scope": 244,
+        "sourceUnit": 261,
+        "src": "203:31:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 243,
+        "linearizedBaseContracts": [
+          243
+        ],
+        "name": "Insurengine",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 242,
+            "mutability": "mutable",
+            "name": "policies",
+            "nodeType": "VariableDeclaration",
+            "scope": 243,
+            "src": "260:15:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_Policy_$260",
+              "typeString": "contract Policy"
+            },
+            "typeName": {
+              "id": 241,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 240,
+                "name": "Policy",
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 260,
+                "src": "260:6:1"
+              },
+              "referencedDeclaration": 260,
+              "src": "260:6:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Policy_$260",
+                "typeString": "contract Policy"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "scope": 244,
+        "src": "236:43:1"
+      }
+    ],
+    "src": "32:248:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/insurance_engine.sol",
+    "exportedSymbols": {
+      "Hashsurance": [
+        235
+      ],
+      "Insurengine": [
+        243
+      ],
+      "Policy": [
+        260
+      ]
+    },
+    "id": 244,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 237,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:1"
+      },
+      {
+        "absolutePath": "/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/Hashsurance.sol",
+        "file": "./Hashsurance.sol",
+        "id": 238,
+        "nodeType": "ImportDirective",
+        "scope": 244,
+        "sourceUnit": 236,
+        "src": "108:27:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/policy_contract.sol",
+        "file": "./policy_contract.sol",
+        "id": 239,
+        "nodeType": "ImportDirective",
+        "scope": 244,
+        "sourceUnit": 261,
+        "src": "203:31:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 243,
+        "linearizedBaseContracts": [
+          243
+        ],
+        "name": "Insurengine",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 242,
+            "mutability": "mutable",
+            "name": "policies",
+            "nodeType": "VariableDeclaration",
+            "scope": 243,
+            "src": "260:15:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_Policy_$260",
+              "typeString": "contract Policy"
+            },
+            "typeName": {
+              "id": 241,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 240,
+                "name": "Policy",
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 260,
+                "src": "260:6:1"
+              },
+              "referencedDeclaration": 260,
+              "src": "260:6:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Policy_$260",
+                "typeString": "contract Policy"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "scope": 244,
+        "src": "236:43:1"
+      }
+    ],
+    "src": "32:248:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-04-09T17:05:11.865Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

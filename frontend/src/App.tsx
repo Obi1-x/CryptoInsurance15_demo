@@ -9,29 +9,38 @@ import './App.css';
 // }
 
 function App() {
-  const [hashsurance, setHashsurance] = useState(undefined);
+  const [hashsurance, setHashsurance] = useState<any | undefined>(undefined);
   const [data, setData] = useState<string | undefined>(undefined);
+  const [tokenName, setTokenName] = useState(undefined) as any;
+  const [bscState, setBscState] = useState(false);
 
   useEffect(() => {
     console.log('env', env.api);
     const init = async () => {
       const { hashsurance } = await getBlockchain();
-      if ('readData()' in hashsurance === false) {
+      if (hashsurance.checkNetwork() === false) {
         setHashsurance(hashsurance);
-        setData('Select Required Metamask network');
+        setData('Select Binance Smart Chain Test  Network Required');
         return;
       }
-      const data = await hashsurance.readData();
+      // const data = await hashsurance.totalSupply();
+      const dataTest = await Promise.all([hashsurance.checkNetwork(), hashsurance.totalSupply(), hashsurance.getTokenName()])
+      console.log('dataTest', dataTest[0], dataTest[1]["_hex"], dataTest[2]);
+
       setHashsurance(hashsurance);
-      setData(data);
+      setData(dataTest[1]["_hex"]);
+      setTokenName(dataTest[2]);
+      setBscState(dataTest[0]);
     };
     init();
   }, []);
 
-  const updateData = async e => {
+  const updateData = async (e: any) => {
     e.preventDefault();
     const data = e.target.elements[0].value;
-    const tx = await hashsurance.updateData(data);
+    console.log('data', e.target.elements[0].value, e.target.elements[1].value);
+
+    const tx = await hashsurance.transfer(data);
     await tx.wait();
     const newData = await hashsurance.readData();
     setData(newData);
@@ -39,32 +48,41 @@ function App() {
 
 
   if (
-    (typeof helloWorld === 'undefined'
+    (typeof hashsurance === 'undefined'
       || typeof data === 'undefined')
   ) {
-    console.log(helloWorld, data);
-    return `<div>Loading...</div>`;
+    const loadingData = <div>Loading...</div>;
+    console.log(hashsurance, data);
+    return loadingData;
   }
 
   return (
     <div className='container'>
       {/* if Metamask not selected prompt message */}
-      {'readData()' in hashsurance === false && <div className="row">{data.toString()}</div>}
+      {bscState === false && <div className="row">
+        <div>{data}</div>
+        {/* <div>Token quantity is: {tokenName}</div> */}
+      </div>}
 
       {/* if Metamask is selectected */}
-      {'readData()' in hashsurance === true && <div className='row'>
+      {bscState === true && <div className='row'>
         <div className='col-sm-6'>
-          <h2>Data:</h2>
-          <p>{data.toString()}</p>
+          <h2>Token name is: {tokenName}</h2>
+          <p>Token quantity is: {data}</p>
         </div>
 
         <div className='col-sm-6'>
           <h2>Change data</h2>
           <form className="form-inline" onSubmit={e => updateData(e)}>
             <input
-              type="text"
+              type="text" name="_address"
               className="form-control"
-              placeholder="data"
+              placeholder="token address"
+            />
+            <input
+              type="text" name="_value"
+              className="form-control"
+              placeholder="token quantity"
             />
             <button
               type="submit"
