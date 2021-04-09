@@ -7,13 +7,14 @@
 env.js
 .env
 /frontend/.env
-/frontend/src/env.js
 
 # testing
 /coverage
 
 # production
 /build
+.env
+/frontend/.env
 
 # misc
 .DS_Store
