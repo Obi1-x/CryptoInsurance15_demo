@@ -20,6 +20,7 @@ contract Policy{
     InsuredItem = insured;
     CreationTime = block.timestamp;
     Principal = principal;
+    premPaymentCount++; //Policy holder should have paid the intial 10%.
   }
 
   function computeVariables() public{
@@ -27,5 +28,9 @@ contract Policy{
       predictedTenure = 12;
       nextPremium = Principal / predictedTenure;
 
+  }
+
+  function validityStatus() public{
+      
   }
 }

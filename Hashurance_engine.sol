@@ -1,13 +1,20 @@
 pragma solidity ^0.8.0;
-//import "./Hashsurance_T.sol";   //Imports token contracts from finance department.
-import "./policy_contract.sol"; //Imports policy contract to create and manage policies.
+import "./validators_hub.sol"; 
+import "./Hashurance_T.sol";        //Imports Hashurance token
+import "./policy_contract.sol";     //Imports policy contract to create and manage policies.
 
 contract Insurengine{
-  //Holds the entire policies in the protocol.
-  Policy[] public policyArchieve;
+    //Hushurance token contract object.
+    HashuranceToken private hashuranceToken;
+    
+    //Holds the entire policies in the protocol.
+    Policy[] public policyArchieve;
 
-  //Stores all insurance applications, before they get approved and transformed to a policy.
-  ApplicationForm[] public applications;
+    //Validators hub contract object.
+    VotesAndValidations public validatorsHub;
+
+    //Stores all insurance applications, before they get approved and transformed to a policy.
+    ApplicationForm[] public applications;
 
   struct ApplicationForm{
       address applicant;       //Who is applying to be insured
@@ -20,14 +27,38 @@ contract Insurengine{
       string reasonForDenial;  //Possible reasons for a rejection.
       uint applicationID;      //Application Id.
       uint prequelID;          //Previous application Id if this is a re-application.
-  }
+    }
+
+  struct receiptTemplate{
+        uint blockNumber;
+        address from_;
+        address to_;
+        address receiver;
+        uint value;
+        uint transactionHash;
+    }
+
+  constructor(address vHubAddress){
+      hashuranceToken = new HashuranceToken(msg.sender); //Creates instance of Hashurance token.
+      validatorsHub = VotesAndValidations(vHubAddress);
+      }
 
   //Function to apply for an insurance.
   // @prequel should be 0 if its a fresh insurance application.
-  function applyForInsurance(string memory insuring, uint cost, uint prequel) public returns(bool){
+  function applyForInsurance(string memory insuring, uint cost, uint prequel, receiptTemplate memory receipt) public returns(bool){
+      //Transfer BUSD to Hashurance Engine at frontend and wait for a response (transaction hash).
+      //Use the response to create a receipt then call this function.
+
+      //Confirm payment of BUSD from the CALLER of this function (applicant).
+      //Use the response to send (separate and lock) the Hashsurance token equivalent of BUSD that was sent by the applicant.
+      hashuranceToken.updateDepoPool(receipt.value, receipt);
+
+      //Submit application after successful transfer
       ApplicationForm memory newApplicationForm = ApplicationForm(msg.sender, insuring, cost, block.timestamp, 0, 0, false, "N/A", applications.length, prequel); //Application form filled, with approved variable set to false.
       applications.push(newApplicationForm);
-      //Make initial deposit of 10% the estimated cost.
+
+      //Add user to validator's court, since he now has hashurance tokens locked within the contract.
+      validatorsHub.addToCourt(msg.sender, receipt.value);
       return true;
   }
 
@@ -55,5 +86,4 @@ contract Insurengine{
           theForm.reasonForDenial = reason;
       }
   }
-
 }
