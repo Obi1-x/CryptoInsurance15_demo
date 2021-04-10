@@ -1,10 +1,12 @@
-pragma solidity ^0.6.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
 contract Hashsurance{
     string  public name = "Hashsurance Token";                      
     string  public symbol = "HASH";                             
     uint256 public totalSupply_ = 21000000000;    
     uint8   public decimals = 18; 
+    bool public networkTypeBSC = true;
 
     event Transfer(
         address indexed _from,
@@ -60,5 +62,13 @@ contract Hashsurance{
     function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
         return allowed[_owner][_spender];
     }
+
+    function checkNetwork() external view returns(bool) {
+    return networkTypeBSC;
+  }
+
+  function getTokenName() external view returns(string memory) {
+      return name;
+  }
 
 }
