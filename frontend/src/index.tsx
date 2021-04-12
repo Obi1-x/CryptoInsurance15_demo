@@ -5,16 +5,17 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "./../node_modules/font-awesome/css/font-awesome.css";
 import './index.css';
+
+import { store } from './createStore.js';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { store } from './createStore.js';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
     <BrowserRouter>
-      <Provider store={store}><App /></Provider></BrowserRouter>
+      <Provider store={store}><App /></Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

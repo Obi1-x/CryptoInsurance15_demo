@@ -1,8 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 // is use for redux middleware implementation 
 import reduxThunk from 'redux-thunk';
-import reducer from './store/reducers/reducer.js';
-import { watchAuth } from './store/sagas'
+import reducer from './store/reducer/reducer.js';
 
 export const middlewares = [reduxThunk];
 

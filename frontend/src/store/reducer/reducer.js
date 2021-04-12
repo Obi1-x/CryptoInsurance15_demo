@@ -1,5 +1,4 @@
 import * as actionTypes from '../actions/index';
-import { minCalendarMonth } from '../../libs/helper';
 const initialState = {
     status: false, posts: [],
 }
@@ -10,7 +9,8 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.LOGIN_USER:
             const newState = Object.assign({}, state);
-            newState.user = action.resultEld
+            newState.user = action.payload
+            console.log('newState', newState);
             return newState;
 
 
