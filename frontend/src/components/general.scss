@@ -13,3 +13,38 @@
     border:2px solid #fff1f7;
  }
 
+
+ .validationErrMsg {
+    font-size: 10px;
+    color: rgb(247, 33, 33);
+    padding: 3px 10px;
+    font-family: 'Montserrat', sans-serif; 
+  }
+
+
+  
+.formInput {
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+  }
+  
+  .formInput::placeholder {
+    color: #8b8b8b;
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+
+
+  
+.redBorder {
+    border: 1px solid red;
+  }
+
+  
+.btnLoadIcon{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  }
