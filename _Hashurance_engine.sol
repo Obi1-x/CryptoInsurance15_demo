@@ -102,6 +102,7 @@ contract _Insurengine{
           template.paymentTime);
       policy_.computeVariables();
       policyArchieve.push(policy_);
-      //Release funds form HSHT.
+       //Release equivalent HSHT funds, previously minted, to newly created policy contract.
+      hashuranceToken.purgeDepoPool(applId, policy_, template.value);
   }
 }

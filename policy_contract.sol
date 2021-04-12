@@ -12,6 +12,7 @@ contract Policy{
 
   uint public predictedTenure;  //How long the policy will last in months before a claim.
   uint public nextPremium;      //The amount of stablecoin the policy holder will pay next.
+  uint public premiumDeadline;
   uint public Rprofit; //a constant
 
   constructor(
@@ -26,15 +27,20 @@ contract Policy{
     InsuredItem = insured;
     CreationTime = block.timestamp;
     Principal = principal;
-    premiumHistory[paymentTime] = intialPayment; 
+    premiumHistory[paymentTime] = intialPayment;
+    premiumDeadline = CreationTime + 2592000;//1 month from now
     premPaymentCount++;
+    //Rprofit = 0.3 * principal;
   }
 
   function computeVariables() public{
-      //Estimate and predict the policy period or tenure.
+      require(premiumDeadline < block.timestamp); //Might change this.
+       //Estimate and predict the policy period or tenure.
       predictedTenure = 12;
-      nextPremium = Principal / predictedTenure;
-      // Rprofit = 0.3 * principal;
+       //Compute the next premium amount.
+      nextPremium = 150; //Principal / predictedTenure;
+       //Compute prmium deadline.
+      premiumDeadline += 2592000;//1 month from now.
     }
 
   function validityStatus() public view returns(string memory validity){

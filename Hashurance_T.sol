@@ -126,7 +126,16 @@ contract HashuranceToken{
         //Assuming 1HSHT = 1BUSD. NOTE this will not always be the case.
         initDepositesTotal += _value; //Adds to the pool of depositors funds.
         balances[Curator] -= _value;  //Deducts from curators funds.
-        circulatingSupply_ += _value;
+        //circulatingSupply_ += _value;
         emit Pendings(Curator, _value);
+    }
+
+    function purgeDepoPool(uint appliId, address to_, uint _value)public{
+        require(initDepositesTotal > _value);
+        //Can legally call this function if you are the user that deposited BUSD.
+        //address who = receipts[appliId].from_;
+        //require(who == msg.sender);
+        initDepositesTotal -= _value;
+        tranfer(to_, _value);
     }
 }
