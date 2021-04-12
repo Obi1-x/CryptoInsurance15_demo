@@ -1,0 +1,26 @@
+
+
+      
+      @font-face {
+        font-family: 'Avenir';
+        src: url('./avenir-master/AvenirLight.eot');
+        src: url('./avenir-master/AvenirLight.ttf') format("truetype"),url('./avenir-master/AvenirLight.woff2') format("woff2"),url('./avenir-master/AvenirMedium.woff') format("woff");
+        font-weight: 300;
+        font-style: normal
+      }
+
+      @font-face {
+        font-family: 'Avenir';
+        src: url('./avenir-master/AvenirMedium.eot');
+        src: url('./avenir-master/AvenirMedium.ttf') format("truetype"),url('./avenir-master/AvenirLight.woff2') format("woff2"),url('./avenir-master/AvenirMedium.woff') format("woff");
+        font-weight: 500;
+        font-style: normal
+      }
+
+      @font-face {
+        font-family: 'Avenir';
+        src: url('./avenir-master/AvenirBold.eot');
+        src: url('./avenir-master/AvenirBold.ttf') format("truetype"),url('./avenir-master/AvenirBold.woff2') format("woff2"),url('./avenir-master/AvenirBold.woff') format("woff");
+        font-weight: 700;
+        font-style: normal
+      }
