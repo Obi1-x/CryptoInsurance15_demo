@@ -8,16 +8,17 @@ contract HashuranceToken{
     uint256 public circulatingSupply_;
     uint8   public decimals = 18;
     uint256 public initDepositesTotal; 
-    mapping(address=>uint256) public balances;
-    mapping(address=>mapping(address=>uint256)) public allowed;
-    //Payment references to BUSD deposites;
-    mapping(uint=>receiptTemplate)public receipts;  //Still not so secure.
+    mapping(address => uint256) public balances;
+    mapping(address => mapping(address => uint256)) public allowed;
+    //ApplicationID => receipt. Payment references to BUSD deposites;
+    mapping(uint => receiptTemplate)public receipts;  //Still not so secure.
 
     struct receiptTemplate{
         uint blockNumber;
         address from_;
         address to_;
         address receiver;
+        uint paymentTime;
         uint value;
         uint transactionHash;
     }
@@ -59,6 +60,10 @@ contract HashuranceToken{
         return totalSupply_;
     }
 
+    function getReceipt(uint idKey)public view returns(receiptTemplate memory){
+        return receipts[idKey];
+    }
+
     // Return total amount of tokens in Circulation.
     function circulatingSupply() public view returns (uint256) {
         return circulatingSupply_;
@@ -66,10 +71,6 @@ contract HashuranceToken{
 
     function balanceOf(address _owner) public view returns(uint256){
         return balances[_owner];
-    }
-
-    function getReceipt(uint txHash)public view returns(receiptTemplate memory){
-        return receipts[txHash];
     }
 
     function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
@@ -116,9 +117,10 @@ contract HashuranceToken{
 
     //Used to store the total equivalent amount of application deposites prior approval.
     //Later tranfer to policy contract address after approval and creation.
-    function updateDepoPool(uint256 _value, receiptTemplate memory _receipt) public onlyCurator{  //Only the Hushurance engine can create tellers.
+    function updateDepoPool(uint applicationID, receiptTemplate memory _receipt) public onlyCurator{  //Only the Hushurance engine can create tellers.
+        uint _value = _receipt.value;
         require(balances[Curator] >= _value);
-        receipts[_receipt.transactionHash] = _receipt; //Store the BUSD payment receipt.
+        receipts[applicationID] = _receipt; //Store the BUSD payment receipt.
         
         //Compute the Hashurance equivalent of BUSD (value) sent.
         //Assuming 1HSHT = 1BUSD. NOTE this will not always be the case.
