@@ -14,8 +14,7 @@ contract voteNvalidate{
         uint appId, 
         uint decision, 
         uint approveCount, 
-        uint denyCount, 
-        uint finalDeci) public returns(uint[3] memory){
+        uint denyCount) public returns(uint[3] memory){
         require(validators[msg.sender] > 0); //Makes sure only validators can inspect (i.e rank > 0).
         require(getTotalValidations(approveCount, denyCount) < numOfValidators); //Checks if the form is still open for validations. Might promote to modifier. 
         
@@ -33,6 +32,44 @@ contract voteNvalidate{
         }
 
         //Makes final decision.
+        uint finalDeci = 0;
+        if(getTotalValidations(approveCount, denyCount) == numOfValidators && approveCount != denyCount){ //If All validators has inspected and the results arent equal.
+          //Judge
+          if(approveCount > denyCount){ //Approval.
+              finalDeci = 4;
+            }else if(approveCount < denyCount){ //Rejection.
+              finalDeci = 2;
+            }
+        }
+        //Update return values.
+        uint[3] memory report;
+        report[0] = approveCount;
+        report[1] = denyCount;
+        report[2] = finalDeci;
+        return report;
+    }
+
+    function inspectClaimRequest(
+        address policyAddress, 
+        uint decision, 
+        uint approveCount, 
+        uint denyCount) public returns(uint[3] memory){
+        require(validators[msg.sender] > 0); //Makes sure only validators can inspect (i.e rank > 0).
+        require(getTotalValidations(approveCount, denyCount) < numOfValidators); //Checks if the form is still open for validations. Might promote to modifier. 
+        
+        //Check if msg.sender has applied before.
+
+        //Inspection
+        if(decision == 4){ //Approve.
+          approveCount++;
+          //validationRegister[msg.sender][appId] = 4; // 1 = true
+        }else if(decision == 2){ //Reject.
+          denyCount++;
+          //validationRegister[msg.sender][appId] = 2; // 2 = false
+        }
+
+        //Makes final decision.
+        uint finalDeci = 0;
         if(getTotalValidations(approveCount, denyCount) == numOfValidators && approveCount != denyCount){ //If All validators has inspected and the results arent equal.
           //Judge
           if(approveCount > denyCount){ //Approval.

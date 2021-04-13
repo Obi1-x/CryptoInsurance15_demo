@@ -44,9 +44,37 @@ contract _Insurengine{
       validatorsHub = voteNvalidate(vHubAddress);
       }
 
+  function getAppication(uint applId)public view returns(ApplicationForm memory){
+      ApplicationForm memory form = applications[applId];
+      return form;
+    }
+
+  function submitPremium(address policyAddress, receiptTemplate memory receipt)public returns(bool){
+       //Confirm and process funds.
+       receipt.paymentTime = block.timestamp; //Will later change this to the timestamp returned at the front end.
+       hashuranceToken.transfer(policyAddress, receipt.value); //Move HSHT to policy contract.
+       Policy memory destinationPolicy = Policy(policyAddress);
+       destinationPolicy.logPremiumHistory(receipt.paymentTime, receipt.value);
+       return true
+  }
+
    //Function to apply for an insurance.
    // @prequel should be 0 if its a fresh insurance application.
   function applyForInsurance(string memory insuring, uint cost, uint prequel, receiptTemplate memory receipt) public returns(bool){
+       //Confirm and process funds.
+       receipt.paymentTime = block.timestamp;
+      hashuranceToken.updateDepoPool(applications.length, reformReceipt(receipt));
+
+       //Submit application after successful transfer
+      ApplicationForm memory newApplicationForm = ApplicationForm(msg.sender, insuring, cost, block.timestamp, 0, 0, 0, "N/A", applications.length, prequel); //Application form filled, with approved variable set to false.
+      applications.push(newApplicationForm);
+
+       //Add user to validator's court, since he now has hashurance tokens locked within the contract.
+      validatorsHub.addToCourt(msg.sender, receipt.value);/////////////////
+      return true;
+    }
+
+    function reformReceipt(receiptTemplate memory receipt)private view returns(HashuranceToken.receiptTemplate memory){
       //Transfer BUSD to Hashurance Engine at frontend and wait for a response (transaction hash).
       //Use the response to create a receipt then call this function.
 
@@ -59,38 +87,39 @@ contract _Insurengine{
       receipt_toToken.receiver = receipt.receiver;
       receipt_toToken.value = receipt.value;
       receipt_toToken.transactionHash = receipt.transactionHash;
-      hashuranceToken.updateDepoPool(applications.length, receipt_toToken);//////////////////
-
-       //Submit application after successful transfer
-      ApplicationForm memory newApplicationForm = ApplicationForm(msg.sender, insuring, cost, block.timestamp, 0, 0, 0, "N/A", applications.length, prequel); //Application form filled, with approved variable set to false.
-      applications.push(newApplicationForm);
-
-       //Add user to validator's court, since he now has hashurance tokens locked within the contract.
-      validatorsHub.addToCourt(msg.sender, receipt.value);/////////////////
-      return true;
+      return receipt_toToken;
   }
 
-  function getAppication(uint applId)public view returns(ApplicationForm memory){
-      ApplicationForm memory form = applications[applId];
-      return form;
-  }
-
-  function preForInspection(uint aFormID, uint decision, string memory reason)public returns(bool){
+  function prepForInspection(uint aFormID, uint decision, string memory reason)public returns(bool){
       ApplicationForm memory aForm = applications[aFormID];
       aForm.reasonForDenial = reason; //Save the lastest reason, if its not empty.
-      uint[3] memory returnedValues = validatorsHub.inspect(aFormID,decision, aForm.toApproveCount, aForm.toDenyCount, aForm.finalDecision);
+      uint[3] memory returnedValues = validatorsHub.inspect(aFormID,decision, aForm.toApproveCount, aForm.toDenyCount);
       aForm.toApproveCount = returnedValues[0];
       aForm.toDenyCount = returnedValues[1];
       aForm.finalDecision = returnedValues[2];
-      applications[aFormID] = aForm;
       if(aForm.finalDecision == 4){
-          createPolicy(aFormID); //Creates policy if the final Decision is approved.
+           //Clear reasons for denial, entered by validators, if the application was approved.
+          aForm.reasonForDenial = "N/A";
       }
+      applications[aFormID] = aForm;
       return true;
   }
 
-  function createPolicy(uint applId) private{
-      ApplicationForm memory approvedApplication = applications[applId];
+  function prepForClaimInspection(address policyAddress, uint decision, string memory reason)public return(bool){
+      Policy memory destinationPolicy = Policy(policyAddress);
+      uint[3] memory returnedValues = validatorsHub.inspectClaimRequest(
+          policyAddress,
+          decision, 
+          destinationPolicy.toApproveCount, 
+          destinationPolicy.toDenyCount);
+      destinationPolicy.enterInspectionResult(returnedValues[0], returnedValues[1], returnedValues[2]);
+      destinationPolicy.prepForWithdrawal();
+      return true;
+  }
+
+  function createPolicy(uint applId) public{
+      ApplicationForm memory approvedApplication = applications[applId]; //Might conme back to this later.
+      require(msg.sender == approvedApplication.applicant, "Not the applicant");
       require(approvedApplication.finalDecision == 4, "Not approved");  //If its approved;
       HashuranceToken.receiptTemplate memory template = hashuranceToken.getReceipt(applId);
       Policy policy_ = new Policy(
@@ -104,5 +133,12 @@ contract _Insurengine{
       policyArchieve.push(policy_);
        //Release equivalent HSHT funds, previously minted, to newly created policy contract.
       hashuranceToken.purgeDepoPool(applId, policy_, template.value);
-  }
+    }
+
+    function claimInsurance(address policyAddress)public{
+        Policy memory destinationPolicy = Policy(policyAddress);
+         //Ensures the claimer is the holder of this policy.
+        require(msg.sender == destinationPolicy.PolicyHolder, "Cannot claim!");
+        destinationPolicy.claim();
+    }
 }

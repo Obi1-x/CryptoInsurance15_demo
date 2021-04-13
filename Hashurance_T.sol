@@ -132,9 +132,9 @@ contract HashuranceToken{
 
     function purgeDepoPool(uint appliId, address to_, uint _value)public{
         require(initDepositesTotal > _value);
-        //Can legally call this function if you are the user that deposited BUSD.
-        //address who = receipts[appliId].from_;
-        //require(who == msg.sender);
+         //Can only use this function if you are the user that deposited BUSD.
+        address who = receipts[appliId].from_;
+        require(who == msg.sender);
         initDepositesTotal -= _value;
         tranfer(to_, _value);
     }
