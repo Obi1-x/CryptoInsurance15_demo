@@ -5,6 +5,7 @@ import env from '../../env';
 import * as actions from '../../store/actions/index';
 import Navbar from '../header/Navbar';
 import homeCss from './home.module.css';
+import generalCss from '../general.module.css';
 import '../general.scss';
 import { Link } from 'react-router-dom';
 
@@ -28,7 +29,8 @@ class Home extends Component {
     }
     render() {
         const { bscState, tokenName } = this.state;
-        const { centerDiv } = homeCss
+        // const { centerDiv } = homeCss;
+        const { centerDiv } = generalCss;
         return (<Fragment>
             <Navbar />
 
