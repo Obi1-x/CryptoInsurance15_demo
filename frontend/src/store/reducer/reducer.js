@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/index';
 const initialState = {
-    status: false, posts: [], submitBTN: false, schemaDetail: {}, userData: {}
+    status: false, posts: [], submitBTN: false, schemaDetail: {}, userData: [], insureData: {}
 }
 // const [userToken, setUserToken] = useState({});
 
@@ -24,8 +24,15 @@ const reducer = (state = initialState, action) => {
 
         case actionTypes.USER_INSURE_REC:
             const userInsureRec = Object.assign({}, state);
-            userInsureRec.userData = action.payload;
-            return schemaData;
+            console.log('action.payload', action.payload);
+            userInsureRec.userData = [action.payload, ...userInsureRec.userData];
+            console.log('userInsureRec.userData', userInsureRec.userData);
+            return userInsureRec;
+
+        case actionTypes.INSURE_INFO:
+            const storeInsureData = Object.assign({}, state);
+            storeInsureData.insureData = action.payload;
+            return storeInsureData;
 
         case actionTypes.GET_POSTS:
             return {

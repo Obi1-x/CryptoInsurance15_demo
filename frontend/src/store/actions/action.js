@@ -44,7 +44,12 @@ export const updateSchemaData = (data) => {
 }
 
 export const updateUserInsurer = (data) => {
+    console.log('data', data);
     return { type: actionTypes.USER_INSURE_REC, payload: data }
+}
+
+export const updateInsureInfo = (data) => {
+    return { type: actionTypes.INSURE_INFO, payload: data }
 }
 
 
@@ -71,6 +76,10 @@ export const storeInsurerPack = (body) => async (dispatch) => {
         });
 
         dispatch({ type: actionTypes.SUBMIT_BTN_STATE, payload: false });
+        dispatch({ type: actionTypes.USER_INSURE_REC, payload: { ...body, id: new Date().getTime() } })
+        // updateUserInsurer({ ...body, id: new Date().getTime() });
+
+        // go to next page
 
     } catch (error) {
         dispatch({ type: actionTypes.SUBMIT_BTN_STATE, payload: false });

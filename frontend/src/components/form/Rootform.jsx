@@ -53,6 +53,7 @@ export const RootForm = callback => {
         if (errorMessage) errorsH[event.target.name] = errorMessage;
         else delete errorsH[event.target.name];
         const inputsH = { ...inputs };
+
         inputsH[event.target.name] = event.target.value;
         setErrors(errorsH);
 
@@ -76,6 +77,7 @@ export const RootForm = callback => {
         const errors = {};
         for (let item of result.error.details) {
             errors[item.path[0]] = item.message;
+            console.log('errom', errors);
             return errors;
         }
     };

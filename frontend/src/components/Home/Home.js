@@ -64,6 +64,7 @@ class Home extends Component {
                                                 <h4 className="text-center py-3"> P= {data.policyTenure}</h4>
                                                 <h4 className="text-center"> P= {data.policyPremiumAmt}</h4>
 
+                                                <div className="text-center h4">{data.policyStatus ? "Valid" : "Invalid"}</div>
                                             </div>
                                         </div>
                                     ))}
