@@ -63,7 +63,9 @@ export const RootForm = callback => {
     const validateProperty = ({ name, value },) => {
         const obj = { [name]: value };
         const schema = { [name]: schemaH[name] }
+
         const { error } = Joi.validate(obj, schema);
+        console.log('error', error);
         return error ? error.details[0].message : null;
     }
 

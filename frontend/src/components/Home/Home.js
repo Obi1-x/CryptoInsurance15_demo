@@ -44,7 +44,8 @@ class Home extends Component {
                         {/* Insurance Apply Btn */}
                         <div className="row">
                             <div className="col-lg-2 col-md-4">
-                                <a style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h1" href="#new-loan">Apply for New Insurance</a>
+                                {/* <a style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h1" href="#new-loan">Apply for New Insurance</a> */}
+                                <Link style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h1" to="/insurance-apply">Apply for New Insurance</Link>
                             </div>
                         </div>
 
@@ -86,7 +87,7 @@ class Home extends Component {
                         {/* Applications Btn */}
                         <div className="row">
                             <div className="col-lg-2 col-md-4">
-                                <a style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h2" href="insurance-apply">Applications</a>
+                                {/* <a style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h2" href="insurance-apply">Applications</a> */}
                                 <Link style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h2" to="/insurance-apply">Applications</Link>
                             </div>
                         </div>
