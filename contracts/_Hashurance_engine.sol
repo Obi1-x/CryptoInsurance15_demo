@@ -13,6 +13,9 @@ contract _Insurengine{
      //Validators hub contract object.
     voteNvalidate public validatorsHub;
 
+    // to validate if the require network is selected on metamask
+    bool public networkTypeBSC = true;
+
      //Stores all insurance applications, before they get approved and transformed to a policy.
     ApplicationForm[] public applications;
 
@@ -153,4 +156,15 @@ contract _Insurengine{
         require(msg.sender == destinationPolicy.policy_Holder(), "Restricted!");
         hashuranceToken.transferFrom(address(destinationPolicy), destinationPolicy.policy_Holder(), destinationPolicy.Principal());
     }
+
+    // to check network selected
+    function checkNetwork() external view returns(bool) {
+    return networkTypeBSC;
+  }
+
+    // to get token name
+function getHashTokenName() external view returns(string memory) {
+    return hashuranceToken.getTokenName();
+      
+  }
 }

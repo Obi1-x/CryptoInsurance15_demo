@@ -2,7 +2,7 @@
 import detectEthereumProvider from '@metamask/detect-provider';
 import { ethers, Contract } from 'ethers';
 // import SimpleStorage from './contracts/SimpleStorage.json';
-import Hashsurance from './contracts/Hashsurance.json';
+import _Insurengine from './contracts/_Insurengine.json';
 
 const getBlockchain = () =>
     new Promise(async (resolve, reject) => {
@@ -13,19 +13,22 @@ const getBlockchain = () =>
             const networkId = await provider.request({ method: 'net_version' })
             provider = new ethers.providers.Web3Provider(provider);
             const signer = provider.getSigner();
-            if (Hashsurance.networks[networkId]) {
-                const hashsurance = new Contract(
-                    Hashsurance.networks[networkId].address,
-                    Hashsurance.abi,
+            /*  to check a user address
+            ethereum.selectedAddress. */
+            if (_Insurengine.networks[networkId]) {
+                const _insurengine = new Contract(
+                    _Insurengine.networks[networkId].address,
+                    _Insurengine.abi,
                     signer // this will help us send transaction thereby making our communication to be secure
                 );
-                console.log('{ hashsurance }', { hashsurance });
-                resolve({ hashsurance });
+                console.log('{ _insurengine }', { _insurengine }, _Insurengine.networks[networkId].address);
+                resolve({ _insurengine });
                 return;
             } else {
-                const hashsurance = { data: 'Select Required Metamask network' };
-                console.log('{ hashsurance }', { hashsurance });
-                resolve({ hashsurance });
+                const _insurengine = { data: 'Select Required Metamask network' };
+                console.log('{ _insurengine }', { _insurengine });
+                // console.log(ethereum.isMetaMask);
+                resolve({ _insurengine });
                 return;
             }
 

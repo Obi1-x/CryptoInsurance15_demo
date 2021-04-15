@@ -8,9 +8,9 @@ module.exports = function (deployer) {
   deployer.deploy(SimpleStorage, 'Alabi');
 }; */
 
-const Hashsurance = artifacts.require("Hashsurance");
+const _Insurengine = artifacts.require("_Insurengine");
 
 module.exports = function (deployer) {
-  deployer.deploy(Hashsurance);
+  deployer.deploy(_Insurengine, '0xDf4D56b47C5d1223f5FAbB49089e8AF7De418C24');
 };
 
