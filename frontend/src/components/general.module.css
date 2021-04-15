@@ -1,0 +1,82 @@
+.centerDiv {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100%;
+}
+
+.divRelative{
+    position: relative;
+  }
+
+
+  .has_search .dIcon {
+    padding-left: 2.375rem;
+  }  
+
+  
+.has_search .dIcon_feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+  }
+  
+  .has_search .dIcon_search {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: right;
+    pointer-events: none;
+    color: #aaa;
+  }
+
+
+  .employInfoLeftIn{ background: #FBEDED;  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);}
+
+  
+.employInfoLeftInDisabled{ background: #FBEDED !important;  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);}
+
+
+.formSubmitButton {
+    padding: 7px 28px;
+    background: #66993e;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+  }
+  
+  .formSubmitButton:hover {
+    background: #fff;
+    color: #66993e;
+    border: 1px solid #66993e;
+    font-weight: 700;
+    -webkit-transition: background 0.3s ease-in-out;
+    -moz-transition: background 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+
+  .formInput {
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+  }
+  
+  .formInput::placeholder {
+    color: #8b8b8b;
+    font-size: 15px;
+    font-weight: 400;
+  }
+  

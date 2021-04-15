@@ -1,0 +1,32 @@
+/* Define standard variables and values for website */
+$bgcolor: lightblue;
+$textcolor: darkblue;
+$fontsize: 18px;
+
+
+/* 
+background-color: rgb(247, 248, 250);
+    /* background-color: #fff1f7;
+*/
+
+.btn-secondary {
+    // background-color: #6c757d; 
+    // background-color: transparent !important;
+    background-color:  rgb(247, 248, 250);
+}
+
+#walletSelect.btn-secondary:hover {
+    background-color: #fff1f7;
+    border-color: #fff1f7;
+ }
+
+ .btn-check:focus+.btn-secondary, .btn-secondary:focus { 
+    background-color: #fff1f7;
+ }
+
+
+ .nav-link{
+    font-family: 'Proxima Nova';
+    font-style: normal;
+   font-size: 1.8rem;
+ }
