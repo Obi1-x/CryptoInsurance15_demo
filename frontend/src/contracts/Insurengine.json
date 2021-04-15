@@ -1,6 +1,432 @@
 {
   "contractName": "Insurengine",
-  "abi": [],
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "vHubAddress",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "applications",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "applicant",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "whatToInsure",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "estimatedCost",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "applicationTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "toApproveCount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "toDenyCount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "finalDecision",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "reasonForDenial",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "applicationID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "prequelID",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "insuring",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "cost",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "prequel",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "blockNumber",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "from_",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to_",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "receiver",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "paymentTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "transactionHash",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct _Insurengine.receiptTemplate",
+          "name": "receipt",
+          "type": "tuple"
+        }
+      ],
+      "name": "applyForInsurance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "policyAddress",
+          "type": "address"
+        }
+      ],
+      "name": "claimInsurance",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "applId",
+          "type": "uint256"
+        }
+      ],
+      "name": "createPolicy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "applId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getAppication",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "applicant",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "whatToInsure",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "estimatedCost",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "applicationTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "toApproveCount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "toDenyCount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "finalDecision",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "reasonForDenial",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "applicationID",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "prequelID",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct _Insurengine.ApplicationForm",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "hashuranceToken",
+      "outputs": [
+        {
+          "internalType": "contract HashuranceToken",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "policyArchieve",
+      "outputs": [
+        {
+          "internalType": "contract Policy",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "policyAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "decision",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "reason",
+          "type": "string"
+        }
+      ],
+      "name": "prepForClaimInspection",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "aFormID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "decision",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "reason",
+          "type": "string"
+        }
+      ],
+      "name": "prepForInspection",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "policyAddress",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "blockNumber",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "from_",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to_",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "receiver",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "paymentTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "transactionHash",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct _Insurengine.receiptTemplate",
+          "name": "receipt",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "direction",
+          "type": "uint256"
+        }
+      ],
+      "name": "submitPremium",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "validatorsHub",
+      "outputs": [
+        {
+          "internalType": "contract voteNvalidate",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "policyAddress",
+          "type": "address"
+        }
+      ],
+      "name": "withdrawFromPolicy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/insurance_engine.sol\":\"Insurengine\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/Hashsurance.sol\":{\"keccak256\":\"0xcdb96d1293a1cbd32d65ea25c7fc0ff7dda2fb702d154764a1f988c5a6587410\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://84d7442a5248a296f0258f2d31177037fd213631326960440ec95f37bd2d864d\",\"dweb:/ipfs/QmRGkfv5qYMoba8XJdM2pkiNzMzC4idPzZfR7B6p31h4yK\"]},\"/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/insurance_engine.sol\":{\"keccak256\":\"0x25bb75e663f59ee14d3acc4e7cdf43310dc3fd8d624ff0ea8efe59c51fae6470\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ed046eb122b111ef714d5dbf3c80d2ab1210f871483f3170f31a3038efd0ae10\",\"dweb:/ipfs/QmUAA81Q1oGK1W469S3zWEmUvLCF9x2NWFufquDTUD9anq\"]},\"/Users/temitopealabi/Documents/personal/blockchain_training/videos/web3/CryptoInsurance15_demo/contracts/policy_contract.sol\":{\"keccak256\":\"0x1299a23edb3a82267dc6583dd521d82ad3f920a6ea345b3af14616178c2b413e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3e5832d9c01332e7cc0e39eea1fda95559b7e16f2887d823f73e65053dec2997\",\"dweb:/ipfs/QmUY64EiFWxW3CQXhR51HQtfZPiuT38CVfM9ca2B2VSZM3\"]}},\"version\":1}",
   "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122013c5af68d454de375695d990c14ab630a4c9f668a585c609aa99800a84e186b864736f6c63430008000033",
   "deployedBytecode": "0x6080604052600080fdfea264697066735822122013c5af68d454de375695d990c14ab630a4c9f668a585c609aa99800a84e186b864736f6c63430008000033",

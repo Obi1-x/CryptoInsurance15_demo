@@ -138,4 +138,9 @@ contract HashuranceToken{
         initDepositesTotal -= _value;
         transfer(to_, _value);
     }
+
+    // to get token name
+function getTokenName() public view returns(string memory) {
+      return name;
+  }
 }

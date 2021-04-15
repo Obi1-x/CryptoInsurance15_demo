@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Fragment, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
+import getBlockchain from './ethereum';
+// import env from './env';
 import InsuranceApply from './components/insuranceApply/InsuranceApply';
 import Home from './components/Home/Home';
 import InsureListAndPolicy from './components/insureListAndPolicy/InsureListAndPolicy';
@@ -12,44 +14,14 @@ import './App.css';
 
 
 const InsureRoute = lazy(() => import('./components/insure/Insure'));
-
-
-
-
-// import HOC from './components/HOC/hoc'
-
-// interface inputDataMsg {
-//   username: string;
-//   prevState: undefined
-// }
-
-
-
-// function App() {
-//     // app state
-
-
-//     useEffect(() => {
-//         console.log('env', env.api);
-//         setBscState(true);
-//         setTokenName("Hashsurance Token")
-//     }, []);
-
-
-
-
-
-//     return (
-
-//     );
-// }
-
 export interface Props {
 
 }
 
 export interface State {
-
+    bscState: boolean,
+    _insurengine: any,
+    data: string | undefined
 }
 
 class App extends React.Component<Props, State> {
@@ -57,26 +29,50 @@ class App extends React.Component<Props, State> {
         super(props);
         this.state = {
             bscState: false,
-            tokenName: undefined,
+            _insurengine: undefined,
+            data: undefined
         }
     }
 
     componentDidMount() {
-        this.setState({ bscState: true, tokenName: "Hashsurance Token" })
+        // initialize blockchain through metamask
+        this.init();
     }
 
+    init = async () => {
+        const { _insurengine }: { _insurengine: any } = await getBlockchain();
+        if ('checkNetwork()' in _insurengine === false) {
+            this.setState({
+                _insurengine, data: 'Select Binance Smart Chain Test Network Required'
+            })
+            // setHashsurance(hashsurance);
+            // setData('Select Binance Smart Chain Test Network Required');
+            return;
+        }
+
+        // const dataTest = await Promise.all([_insurengine.checkNetwork(), _insurengine.totalSupply(), _insurengine.getHashTokenName()]);
+        const dataTest = await Promise.all([_insurengine.checkNetwork()]);
+        console.log('dataTest', dataTest[0]);
+        this.setState({ _insurengine, bscState: dataTest[0] });
+    };
+
+
+
     render() {
+        const { bscState, data }: { bscState: boolean, data: string | undefined } = this.state
         return (
             <Fragment>
                 <ToastContainer />
-                <Router>
+                {bscState === false && <div className="row">
+                    <div className="text-center mt-5">
+                        <h1>{data}</h1>
+                    </div>
+                </div>}
+
+                {bscState === true && <Router>
                     <ErrorBoundary>
                         <Suspense fallback={FullPageSpinner}>
                             <Switch>
-
-
-
-
                                 <Route path="/insure-list/:id" render={props => (
                                     <Suspense
                                         fallback={
@@ -90,7 +86,7 @@ class App extends React.Component<Props, State> {
                             </Switch>
                         </Suspense>
                     </ErrorBoundary>
-                </Router>
+                </Router>}
             </Fragment>
         );
     }
