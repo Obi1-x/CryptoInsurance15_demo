@@ -5,6 +5,7 @@ import env from '../../env';
 import * as actions from '../../store/actions/index';
 import Navbar from '../header/Navbar';
 import homeCss from './home.module.css';
+import generalCss from '../general.module.css';
 import '../general.scss';
 import { Link } from 'react-router-dom';
 
@@ -28,7 +29,8 @@ class Home extends Component {
     }
     render() {
         const { bscState, tokenName } = this.state;
-        const { centerDiv } = homeCss
+        // const { centerDiv } = homeCss;
+        const { centerDiv } = generalCss;
         return (<Fragment>
             <Navbar />
 
@@ -42,7 +44,8 @@ class Home extends Component {
                         {/* Insurance Apply Btn */}
                         <div className="row">
                             <div className="col-lg-2 col-md-4">
-                                <a style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h1" href="#new-loan">Apply for New Insurance</a>
+                                {/* <a style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h1" href="#new-loan">Apply for New Insurance</a> */}
+                                <Link style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h1" to="/insurance-apply">Apply for New Insurance</Link>
                             </div>
                         </div>
 
@@ -61,6 +64,7 @@ class Home extends Component {
                                                 <h4 className="text-center py-3"> P= {data.policyTenure}</h4>
                                                 <h4 className="text-center"> P= {data.policyPremiumAmt}</h4>
 
+                                                <div className="text-center h4">{data.policyStatus ? "Valid" : "Invalid"}</div>
                                             </div>
                                         </div>
                                     ))}
@@ -84,7 +88,7 @@ class Home extends Component {
                         {/* Applications Btn */}
                         <div className="row">
                             <div className="col-lg-2 col-md-4">
-                                <a style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h2" href="insurance-apply">Applications</a>
+                                {/* <a style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h2" href="insurance-apply">Applications</a> */}
                                 <Link style={{ fontSize: '1.8rem' }} type="button" className="new-loan btn btn-block btn-lg btn-secondary h2" to="/insurance-apply">Applications</Link>
                             </div>
                         </div>

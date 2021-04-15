@@ -1,6 +1,6 @@
 import React from 'react';
 import { RootForm } from "./Rootform";
-import generalCss from '../../general.module.css';
+import generalCss from '../general.module.css';
 
 
 export const HookForm = (callback) => {

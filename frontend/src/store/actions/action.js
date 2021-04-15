@@ -34,4 +34,62 @@ export const logStatus = (data) => {
 }
 
 
+export const updateSubmitBTNState = (data) => {
+    return { type: actionTypes.SUBMIT_BTN_STATE, payload: data };
+}
 
+// schema detail
+export const updateSchemaData = (data) => {
+    return { type: actionTypes.FORM_SCHEMA_DATA, payload: data }
+}
+
+export const updateUserInsurer = (data) => {
+    console.log('data', data);
+    return { type: actionTypes.USER_INSURE_REC, payload: data }
+}
+
+export const updateInsureInfo = (data) => {
+    return { type: actionTypes.INSURE_INFO, payload: data }
+}
+
+
+export const storeInsurerPack = (body) => async (dispatch) => {
+    try {
+        toast.info('please wait while processing your data ', {
+            position: "bottom-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+        console.log('body', body);
+        toast.success('security information saved, proceed ', {
+            position: "bottom-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+
+        dispatch({ type: actionTypes.SUBMIT_BTN_STATE, payload: false });
+        dispatch({ type: actionTypes.USER_INSURE_REC, payload: { ...body, id: new Date().getTime() } })
+        // updateUserInsurer({ ...body, id: new Date().getTime() });
+
+        // go to next page
+
+    } catch (error) {
+        dispatch({ type: actionTypes.SUBMIT_BTN_STATE, payload: false });
+        console.log(error);
+        if (error.response && error.response.status === 409) { toast.error(error.response.data.error.message); }
+        if (error.response && error.response.status === 401) { toast.error(error.response.data.error.message); }
+        if (error.response && error.response.status === 400) {
+            toast.error(error.response.data.error.message);
+        }
+        console.log(error.message);
+
+    }
+}
